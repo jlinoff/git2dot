@@ -167,7 +167,7 @@ git add README
 git commit -m 'master - third'
 ```
 
-You can verify using something like `git log`.
+You can verify the repo structure using something like `git log`.
 ```bash
 $ git log --graph --oneline --decorate --all
 * 7fd1f5d (HEAD -> master) master - third
