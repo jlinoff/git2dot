@@ -225,3 +225,15 @@ $  python -m SimpleHTTPServer 8090
 After that you can browse to http://localhost:8090/example.html and you will see this.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22406665/d5f7ca60-e60b-11e6-957f-ff6a9536b615.png" width="1100" alt="example">
+
+As you can see, there is a long chain of commits, to run it again using the squash option.
+
+```bash
+$ git2dot.py --squash --png --svg --html example1.html example1.dot
+```
+
+And browse to http://localhost:8090/example1.html and you will see this.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22406722/df2c38ae-e60c-11e6-91a8-6890e513cb36.png" width="1100" alt="example1">
+
+Which is a cleaner view of the overall structure.
