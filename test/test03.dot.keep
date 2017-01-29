@@ -1,0 +1,36 @@
+|Record:|b270710|9d30549| (branchA)|2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|branchA - second|2017-01-29 08:57:40 -0800
+|Record:|5c4f6fa|e47bd42| (branchB)|2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|branchB - seventh|2017-01-29 08:57:40 -0800
+|Record:|8082fda|f13e90d| (tag: v1.0a, tag: v1.0, branchX2, branchX1)|2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|master - second|2017-01-29 08:57:40 -0800
+|Record:|9be50a3|8082fda| (HEAD -> master)|2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|master - third|2017-01-29 08:57:40 -0800
+|Record:|9d30549|8082fda||2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|branchA - first|2017-01-29 08:57:40 -0800
+|Record:|e47bd42|008fe88||2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|branchB - sixth|2017-01-29 08:57:40 -0800
+|Record:|f13e90d|||2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|master - first|2017-01-29 08:57:40 -0800
+|Record:|008fe88|40a608d||2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|branchB - fifth|2017-01-29 08:57:40 -0800
+|Record:|40a608d|1251448||2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|branchB - fourth|2017-01-29 08:57:40 -0800
+|Record:|1251448|e9b9d76||2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|branchB - third|2017-01-29 08:57:40 -0800
+|Record:|e9b9d76|c7640fb||2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|branchB - second|2017-01-29 08:57:40 -0800
+|Record:|c7640fb|8082fda||2017-01-29 08:57:40 -0800
+
+@@@git2dot-label@@@:|branchB - first|2017-01-29 08:57:40 -0800

@@ -1,0 +1,48 @@
+digraph G {
+   graph[rankdir="LR", bgcolor="white"];
+   node[shape=ellipse, fontsize=10.0, style="filled"];
+   edge[weight=2, penwidth=1.0, fontsize=10.0, arrowtail="open", dir="back"];
+
+   // label cnode, mnode and snodes
+   "b270710" [label="branchA - second\n2017-01-29 08:57:40", color="bisque"];
+   "5c4f6fa" [label="branchB - seventh\n2017-01-29 08:57:40", color="bisque"];
+   "8082fda" [label="master - second\n2017-01-29 08:57:40", color="lightpink"];
+   "9be50a3" [label="master - third\n2017-01-29 08:57:40", color="bisque"];
+   "9d30549" [label="branchA - first\n2017-01-29 08:57:40", color="bisque"];
+   "e47bd42" [label="branchB - sixth\n2017-01-29 08:57:40", color="tomato"];
+   "f13e90d" [label="master - first\n2017-01-29 08:57:40", color="bisque"];
+   "c7640fb" [label="branchB - first\n2017-01-29 08:57:40", color="tomato"];
+
+   // edges
+   "9d30549" -> "b270710" ;
+   "e47bd42" -> "5c4f6fa" ;
+   "f13e90d" -> "8082fda" ;
+   "8082fda" -> "9be50a3" ;
+   "8082fda" -> "9d30549" ;
+   "c7640fb" -> "e47bd42" [label="6", style=dotted, arrowhead="none", dir="none"];
+   "8082fda" -> "c7640fb" ;
+
+   // annotate branches and tags
+   "b270710+branchA" [label="branchA", color="lightblue", style=filled, shape=box, height=0.15];
+   "b270710" -> "b270710+branchA" [arrowhead=normal, dir=none];
+   {rank=same; "b270710"; "b270710+branchA"};
+
+   "5c4f6fa+branchB" [label="branchB", color="lightblue", style=filled, shape=box, height=0.15];
+   "5c4f6fa" -> "5c4f6fa+branchB" [arrowhead=normal, dir=none];
+   {rank=same; "5c4f6fa"; "5c4f6fa+branchB"};
+
+   "8082fda+tag: v1.0a" [label="tag: v1.0a", color="thistle", style=filled, shape=box, height=0.15];
+   "8082fda+tag: v1.0" [label="tag: v1.0", color="thistle", style=filled, shape=box, height=0.15];
+   "8082fda+tag: v1.0a" -> "8082fda+tag: v1.0" -> "8082fda" [arrowhead=normal, dir=none];
+   "8082fda+branchX2" [label="branchX2", color="lightblue", style=filled, shape=box, height=0.15];
+   "8082fda+branchX1" [label="branchX1", color="lightblue", style=filled, shape=box, height=0.15];
+   "8082fda" -> "8082fda+branchX1" -> "8082fda+branchX2" [arrowhead=normal, dir=none];
+   {rank=same; "8082fda"; "8082fda+tag: v1.0a"; "8082fda+tag: v1.0"; "8082fda+branchX2"; "8082fda+branchX1"};
+
+   "9be50a3+master" [label="master", color="lightblue", style=filled, shape=box, height=0.15];
+   "9be50a3" -> "9be50a3+master" [arrowhead=normal, dir=none];
+   {rank=same; "9be50a3"; "9be50a3+master"};
+
+   // graph label
+   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test03<br/>Purpose: 3 branches, squash enabled, tags and branches<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 08:57:40 PST 2017</font></td></tr></table>>];
+}

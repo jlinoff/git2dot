@@ -1,0 +1,49 @@
+digraph G {
+   graph[rankdir="LR", bgcolor="white"];
+   node[shape=ellipse, fontsize=10.0, style="filled"];
+   edge[weight=2, penwidth=1.0, fontsize=10.0, arrowtail="open", dir="back"];
+   splines="polyline";
+
+   // label cnode, mnode and snodes
+   "e3bcc51" [label="master - third\n2017-01-29 08:58:05", color="bisque"];
+   "5cfd6f5" [label="branchB - seventh\n2017-01-29 08:58:04", color="bisque"];
+   "af86598" [label="branchB - sixth\n2017-01-29 08:58:03", color="tomato"];
+   "ad1accf" [label="branchB - first\n2017-01-29 08:57:58", color="tomato"];
+   "29a00f8" [label="branchA - second\n2017-01-29 08:57:57\n001", color="bisque"];
+   "56153f1" [label="branchA - first\n2017-01-29 08:57:56", color="bisque"];
+   "42b269d" [label="master - second\n2017-01-29 08:57:55\n001", color="lightpink"];
+   "4628728" [label="master - first\n2017-01-29 08:57:54", color="bisque"];
+
+   // edges
+   "42b269d" -> "e3bcc51" ;
+   "af86598" -> "5cfd6f5" ;
+   "ad1accf" -> "af86598" [label="6", style=dotted, arrowhead="none", dir="none"];
+   "42b269d" -> "ad1accf" ;
+   "56153f1" -> "29a00f8" ;
+   "42b269d" -> "56153f1" ;
+   "4628728" -> "42b269d" ;
+
+   // annotate branches and tags
+   "e3bcc51+master" [label="master", color="lightblue", style=filled, shape=box, height=0.15];
+   "e3bcc51" -> "e3bcc51+master" [arrowhead=normal, dir=none];
+   {rank=same; "e3bcc51"; "e3bcc51+master"};
+
+   "5cfd6f5+branchB" [label="branchB", color="lightblue", style=filled, shape=box, height=0.15];
+   "5cfd6f5" -> "5cfd6f5+branchB" [arrowhead=normal, dir=none];
+   {rank=same; "5cfd6f5"; "5cfd6f5+branchB"};
+
+   "29a00f8+branchA" [label="branchA", color="lightblue", style=filled, shape=box, height=0.15];
+   "29a00f8" -> "29a00f8+branchA" [arrowhead=normal, dir=none];
+   {rank=same; "29a00f8"; "29a00f8+branchA"};
+
+   "42b269d+tag: v1.0a" [label="tag: v1.0a", color="thistle", style=filled, shape=box, height=0.15];
+   "42b269d+tag: v1.0" [label="tag: v1.0", color="thistle", style=filled, shape=box, height=0.15];
+   "42b269d+tag: v1.0a" -> "42b269d+tag: v1.0" -> "42b269d" [arrowhead=normal, dir=none, style=dotted, color="blue"];
+   "42b269d+branchX2" [label="branchX2", color="lightblue", style=filled, shape=box, height=0.15];
+   "42b269d+branchX1" [label="branchX1", color="lightblue", style=filled, shape=box, height=0.15];
+   "42b269d" -> "42b269d+branchX1" -> "42b269d+branchX2" [arrowhead=normal, dir=none];
+   {rank=same; "42b269d"; "42b269d+tag: v1.0a"; "42b269d+tag: v1.0"; "42b269d+branchX2"; "42b269d+branchX1"};
+
+   // graph label
+   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test05<br/>Purpose: 3 branches, squash, tags and branches, splines=polyline, @CHID@, tedge<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 08:58:05 PST 2017</font></td></tr></table>>];
+}

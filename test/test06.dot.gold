@@ -1,0 +1,49 @@
+digraph G {
+   graph[rankdir="LR", bgcolor="white"];
+   node[shape=ellipse, fontsize=10.0, style="filled"];
+   edge[weight=2, penwidth=1.0, fontsize=10.0, arrowtail="open", dir="back"];
+   splines="false";
+
+   // label cnode, mnode and snodes
+   "94b83e4" [label="master - third\n2017-01-29 09:03:08", shape="diamond", color="magenta"];
+   "982da83" [label="branchB - seventh\n2017-01-29 09:03:07", shape="diamond", color="magenta"];
+   "f12c890" [label="branchB - sixth\n2017-01-29 09:03:06", color="tomato"];
+   "1c34a0e" [label="branchB - first\n2017-01-29 09:03:01", color="tomato"];
+   "965fe7b" [label="branchA - second\n2017-01-29 09:03:00\n001", shape="diamond", color="magenta"];
+   "f40dc92" [label="branchA - first\n2017-01-29 09:02:59", shape="diamond", color="magenta"];
+   "ac9a071" [label="master - second\n2017-01-29 09:02:58\n001", color="lightpink"];
+   "983a0c4" [label="master - first\n2017-01-29 09:02:57", shape="diamond", color="magenta"];
+
+   // edges
+   "ac9a071" -> "94b83e4" ;
+   "f12c890" -> "982da83" ;
+   "1c34a0e" -> "f12c890" [label="6", style=dotted, arrowhead="none", dir="none"];
+   "ac9a071" -> "1c34a0e" ;
+   "f40dc92" -> "965fe7b" ;
+   "ac9a071" -> "f40dc92" ;
+   "983a0c4" -> "ac9a071" ;
+
+   // annotate branches and tags
+   "94b83e4+master" [label="master", color="lightblue", style=filled, shape=box, height=0.15];
+   "94b83e4" -> "94b83e4+master" [arrowhead=normal, dir=none];
+   {rank=same; "94b83e4"; "94b83e4+master"};
+
+   "982da83+branchB" [label="branchB", color="lightblue", style=filled, shape=box, height=0.15];
+   "982da83" -> "982da83+branchB" [arrowhead=normal, dir=none];
+   {rank=same; "982da83"; "982da83+branchB"};
+
+   "965fe7b+branchA" [label="branchA", color="lightblue", style=filled, shape=box, height=0.15];
+   "965fe7b" -> "965fe7b+branchA" [arrowhead=normal, dir=none];
+   {rank=same; "965fe7b"; "965fe7b+branchA"};
+
+   "ac9a071+tag: v1.0a" [label="tag: v1.0a", color="thistle", style=filled, shape=box, height=0.15];
+   "ac9a071+tag: v1.0" [label="tag: v1.0", color="thistle", style=filled, shape=box, height=0.15];
+   "ac9a071+tag: v1.0a" -> "ac9a071+tag: v1.0" -> "ac9a071" [arrowhead=normal, dir=none];
+   "ac9a071+branchX2" [label="branchX2", color="lightblue", style=filled, shape=box, height=0.15];
+   "ac9a071+branchX1" [label="branchX1", color="lightblue", style=filled, shape=box, height=0.15];
+   "ac9a071" -> "ac9a071+branchX1" -> "ac9a071+branchX2" [arrowhead=normal, dir=none];
+   {rank=same; "ac9a071"; "ac9a071+tag: v1.0a"; "ac9a071+tag: v1.0"; "ac9a071+branchX2"; "ac9a071+branchX1"};
+
+   // graph label
+   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test06<br/>Purpose: 3 branches, no squash, tags and branches, splines=false, cnode<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 09:03:08 PST 2017</font></td></tr></table>>];
+}
