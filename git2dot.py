@@ -668,7 +668,7 @@ def gendot(opts):
                 if attr == opts.align_by_date:
                     continue
 
-                lnd = nd
+            lnd = nd
 
     # Output the graph label.
     if opts.graph_label is not None:
