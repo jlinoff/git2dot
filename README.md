@@ -6,6 +6,10 @@ it to analyze repositories before and after operations like merge and
 rebase to really get a feeling for what happens. It can also be used
 for looking at subsets of history on live repositories.
 
+Here is an example output from test04 in the test directory.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22406472/8a5cb046-e608-11e6-9365-bd40c571d304.png" alt="sample mean">
+
 It works by running over the .git repository in the current directory
 and generating a commit relationship DAG that has both parent and
 child relationships.
@@ -18,8 +22,8 @@ commits with no branch or tag data.
 
 It has a number of different options for customizing the nodes,
 using your own custom git command to generate the data, keeping
-the generated data for re-use and generating graphical output like
-PNG, SVG or even HTML files.
+the generated data for re-use, customizing dot directly and
+generating graphical output like PNG, SVG or even HTML files.
 
 Here is an example run:
 ```bash
@@ -75,6 +79,6 @@ use the `--since` and `--until` options.
 If you want to limit the analysis to commits in a certain range use
 the `--range` option.
 
-You can chose to keep the git output to re-use multiple times with
+You can choose to keep the git output to re-use multiple times with
 different display options or to share by specifying the `-k` (`--keep`)
 option.
