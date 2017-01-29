@@ -657,16 +657,18 @@ def gendot(opts):
             for attr in attrs:
                 v1 = getattr(nd.m_dts, attr)
                 v2 = getattr(lnd.m_dts, attr)
-                if v1 > v2:
+                if v1 < v2:
                     # Add an invisible constraint to guarantee that the
                     # later node appears somewhere to the right.
                     if opts.verbose > 1:
                         info('aligning {} {} to the left of {} {}'.format(lnd.m_cid, lnd.m_dts, nd.m_cid, nd.m_dts))
                     ofp.write('   "{}" -> "{}" [style=invis];\n'.format(lnd.m_cid, nd.m_cid))
+                elif v1 > v2:
+                    break
                 if attr == opts.align_by_date:
                     continue
 
-        lnd = nd
+                lnd = nd
 
     # Output the graph label.
     if opts.graph_label is not None:
