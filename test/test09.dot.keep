@@ -1,0 +1,45 @@
+|Record:|057a1f8|707c357| (branchA)|2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchA - fourth|2017-01-30 12:41:59 -0800
+|Record:|d7197fe|1628887| (branchB)|2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchB - seventh|2017-01-30 12:41:59 -0800
+|Record:|b37aa8d|50eac6c| (tag: v1.0a, tag: v1.0, branchX2, branchX1)|2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|master - second|2017-01-30 12:41:59 -0800
+|Record:|ef59c78|2b5192f| (HEAD -> master)|2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|master - fourth|2017-01-30 12:41:59 -0800
+|Record:|05a006a|6000b77| (tag: v2.0a)|2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchB - fourth|2017-01-30 12:41:59 -0800
+|Record:|707c357|95dd030||2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchA - third|2017-01-30 12:41:59 -0800
+|Record:|1628887|16466d9||2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchB - sixth|2017-01-30 12:41:59 -0800
+|Record:|50eac6c|||2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|master - first|2017-01-30 12:41:59 -0800
+|Record:|2b5192f|b37aa8d||2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|master - third|2017-01-30 12:41:59 -0800
+|Record:|6000b77|682bd9d||2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchB - third|2017-01-30 12:41:59 -0800
+|Record:|95dd030|d79ceac||2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchA - second|2017-01-30 12:41:59 -0800
+|Record:|16466d9|05a006a||2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchB - fifth|2017-01-30 12:41:59 -0800
+|Record:|682bd9d|0a0d4b3||2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchB - second|2017-01-30 12:41:59 -0800
+|Record:|d79ceac|b37aa8d||2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchA - first|2017-01-30 12:41:59 -0800
+|Record:|0a0d4b3|b37aa8d||2017-01-30 12:41:59 -0800
+
+@@@git2dot-label@@@:|branchB - first|2017-01-30 12:41:59 -0800

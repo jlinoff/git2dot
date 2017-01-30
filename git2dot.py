@@ -77,6 +77,12 @@ use the --since and --until options.
 If you want to limit the analysis to commits in a certain range use
 the --range option.
 
+If you want to limit the analysis to a small set of branches or tag
+you can used the --choose-branch and choose-tag options. These options
+prune the graph so that only parents of commits with the choose branch
+or tag ids are included in the graph. This gives you more detail
+controlled that the git options allowed in the --range command.
+
 You can choose to keep the git output to re-use multiple times with
 different display options or to share by specifying the -k (--keep)
 option.
@@ -92,7 +98,7 @@ import subprocess
 import sys
 
 
-VERSION = '0.3'
+VERSION = '0.4'
 DEFAULT_GITCMD = 'git log --format="|Record:|%h|%p|%d|%ci%n%b"'
 
 
@@ -118,6 +124,8 @@ class Node:
         self.m_children = []
 
         self.m_vars = {}  # user defined variable values
+
+        self.m_choose = True  # used by the --choose-* options only
 
         self.m_extra = []
         self.m_dts = dts  # date/time stamp, used for invisible constraints.
@@ -227,6 +235,16 @@ class Node:
 
                 clast = cnext
                 cnext = cnext.m_children[0]
+
+    def rm_parent(self, pcid):
+        while pcid in self.m_parents:
+            i = self.m_parents.index(pcid)
+            self.m_parents = self.m_parents[:i] + self.m_parents[i+1:]
+
+    def rm_child(self, ccid):
+        for i, cnd in reversed(list(enumerate(self.m_children))):
+            if cnd.m_cid == ccid:
+                self.m_children = self.m_children[:i] + self.m_children[i+1:]
 
 
 def info(msg, lev=1):
@@ -372,6 +390,154 @@ def read(opts):
     return out.splitlines()
 
 
+def prune_by_date(opts):
+    '''
+    Prune by date is --since, --until or --range were specified.
+    '''
+    if opts.since != '' or opts.until != '' or opts.range != '':
+        infov(opts, 'pruning parents')
+        nump = 0
+        numt = 0
+        for i, nd in enumerate(Node.m_list):
+            np = []
+            for cid in nd.m_parents:
+                numt += 1
+                if cid in Node.m_map:
+                    np.append(cid)
+                else:
+                    nump += 1
+            if len(np) < len(nd.m_parents):  # pruned
+                Node.m_list[i].m_parents = np
+                Node.m_map[nd.m_cid].m_parents = np
+        infov(opts, 'pruned {:,} parent node references out of {:,}'.format(nump, numt))
+
+
+def prune_by_choice(opts):
+    '''
+    Prune by --choose-branch and --choose-tag if they were specified.
+    '''
+    if len(opts.choose_branch) > 0 or len(opts.choose_tag) > 0:
+        # The algorithm is as follows:
+        #     1. for each branch and tag find the associated node.
+        #
+        #     2. mark all nodes for deletion (m_choose=False)
+        #
+        #     3. walk back through graph and tag all nodes accessible
+        #        from the parent link as keepers (m_choose=True).
+        #        any node found that already has m_choose=True can be
+        #        skipped because it was already processed by another
+        #        traversal.
+        #
+        #     4. delete all nodes marked for deletion.
+        #        iterate over all nodes, collect the delete ids in a cache
+        #        reverse iterate over the cache and remove them
+        #        make sure that they are removed from the list and the map
+        #        just prior to delete a node, remove it from child list
+        #        of its parents and from the parent list of its children.
+        #        make sure that all m_idx settings are correctly updated.
+        infov(opts, 'pruning graph based on choices')
+        bs = {}
+        ts = {}
+
+        # initialize
+        for b in opts.choose_branch:
+            bs[b] = []
+        for t in opts.choose_tag:
+            ts[t] = []
+
+        for idx in range(len(Node.m_list)):
+            Node.m_list[idx].m_choose = False  # step 2
+
+            # Step 1.
+            nd =  Node.m_list[idx]
+            for b in opts.choose_branch:
+                if b in nd.m_branches:
+                    bs[b].append(idx)
+
+            for t in opts.choose_tag:
+                if t in nd.m_tags:
+                    ts[t].append(idx)
+
+        # Warn if any were not found.
+        for b, a in sorted(bs.items()):
+            if len(a) == 0:
+                warn('--choose-branch not found: "{}"'.format(b))
+        for t, a in sorted(ts.items()):
+            if len(a) == 0:
+                warn('--choose-branch not found: "{}"'.format(t))
+
+        # At this point all of the branches and tags have been found.
+        def get_parents(idx, parents):
+            # Can't use recursion because large graphs may have very
+            # long chains.
+            # Use a breadth first expansion instead.
+            # This works because git commits are always a DAG.
+            stack = []
+            stack.append(idx)
+            while len(stack) > 0:
+                idx = stack.pop()
+                if idx in parents:
+                    continue  # already processed
+
+                nd =  Node.m_list[idx]
+                Node.m_list[idx].m_choose = True
+                parents[idx] = nd.m_cid
+                for pcid in nd.m_parents:
+                    pidx = Node.m_map[pcid].m_idx
+                    stack.append(pidx)
+
+        parents = {}  # key=idx, val=cid
+        for b, a in sorted(bs.items()):
+            if len(a) > 0:
+                for idx in a:
+                    get_parents(idx, parents)
+        for t, a in sorted(ts.items()):
+            if len(a) > 0:
+                for idx in a:
+                    get_parents(idx, parents)
+
+        pruning = len(Node.m_list) - len(parents)
+        infov(opts, 'keeping {:,}'.format(len(parents)))
+        infov(opts, 'pruning {:,}'.format(pruning))
+        if pruning == 0:
+            warn('nothing to prune')
+            return
+
+        # We now have all of the nodes that we want to keep.
+        # We need to delete the others.
+        todel = []
+        for nd in Node.m_list[::-1]:
+            if nd.m_choose == False:
+                cid = nd.m_cid
+                idx = nd.m_idx
+
+                # Update the parents child lists.
+                # The parent list is composed of cids.
+                # Note that the child lists stored nodes.
+                for pcid in nd.m_parents:
+                    if pcid in Node.m_map:  # might have been deleted already
+                        pnd =  Node.m_map[pcid]
+                        if pnd.m_choose == True:  # ignore pruned nodes (e.g. False)
+                            pnd.rm_child(cid)
+
+                # Update the child parent lists.
+                # The child list is composed of nodes.
+                # Note that the parent lists store cids.
+                for cnd in nd.m_children:
+                    if cnd.m_choose == True:  # ignore pruned nodes (e.g. False)
+                        cnd.rm_parent(cid)
+
+                # Actual deletion.
+                Node.m_list = Node.m_list[:idx] + Node.m_list[idx+1:]
+                del Node.m_map[cid]
+
+        for i, nd in enumerate(Node.m_list):
+            Node.m_list[i].m_idx = i
+            Node.m_map[nd.m_cid].m_idx = i
+
+        infov(opts, 'remaining {:,}'.format(len(Node.m_list)))
+
+
 def parse(opts):
     '''
     Parse the node data.
@@ -478,24 +644,8 @@ def parse(opts):
     if len(Node.m_list) == 0:
         err('no records found')
 
-    # If --since or --until was specified, we need to prune the
-    # parents that do not exist.
-    if opts.since != '' or opts.until != '' or opts.range != '':
-        infov(opts, 'pruning parents')
-        nump = 0
-        numt = 0
-        for i, nd in enumerate(Node.m_list):
-            np = []
-            for cid in nd.m_parents:
-                numt += 1
-                if cid in Node.m_map:
-                    np.append(cid)
-                else:
-                    nump += 1
-            if len(np) < len(nd.m_parents):  # pruned
-                Node.m_list[i].m_parents = np
-                Node.m_map[nd.m_cid].m_parents = np
-        infov(opts, 'pruned {:,} parent node references out of {:,}'.format(nump, numt))
+    prune_by_date(opts)
+    prune_by_choice(opts)
 
     # Update the child list for each node by looking at the parents.
     # This helps us identify merge nodes.
@@ -736,6 +886,7 @@ def html(opts):
       {3}
   </head>
   <body>
+    <h3>{4}</h3>
     <div style="border-width:3px; border-style:solid; border-color:lightgrey;">
       <object id="digraph" type="image/svg+xml" data="{0}" style="width:100%; min-height:{2};">
         SVG not supported by this browser.
@@ -862,6 +1013,10 @@ def getopts():
    $ {0} -i git.dot.keep -D '@CHID@' 'Change-Id: I([0-9a-z]+)' -l '%h|%s|%cn|%cr|@CHID@' [label="{{label}}", color="purple"] git01.dot
    $ {0} -i git.dot.keep -l '%h|%s|%cr' [label="{{label}}", color="green"] git02.dot
    $ {0} -i git.dot.keep -l '%h|%s|%cn|%cr' [label="{{label}}", color="magenta"] git03.dot
+
+   # Example 11: only report the commits associated with three branches:
+                 origin/1.0.0, origin/1.0.1 and origin/1.1.0
+   $ {0} --choose-branch origin/1.0.0 --choose-branch origin/1.0.1 --choose-branch origin/1.1.0 git01.dot
  '''.format(base)
     afc = argparse.RawTextHelpFormatter
     parser = argparse.ArgumentParser(formatter_class=afc,
@@ -928,6 +1083,37 @@ attribute of a commit node.
 See the documentation for --cnode for more attribute details.
 
 Default: %(default)s
+ ''')
+
+    parser.add_argument('--choose-branch',
+                        action='append',
+                        metavar=('BRANCH'),
+                        default=[],
+                        help='''Choose a branch to include.
+By default all branches are included. When you select this option, you
+limit the output to commit nodes that in the branch parent chain.
+
+You can use it to select multiple branches to graph which basically
+tells the tool to prune all other branches as endpoints.
+
+This is very useful for comparing commits between related branches.
+ ''')
+
+    parser.add_argument('--choose-tag',
+                        action='append',
+                        metavar=('TAG'),
+                        default=[],
+                        help='''Choose a tag to include.
+By default all tags are included. When you select this option, you
+limit the output to commit nodes that in the tag parent chain.
+
+You can use it to select multiple tags to graph which basically
+tells the tool to prune all other tags as endpoints.
+
+This is very useful for comparing commits between related tags.
+
+Make sure that you specify --branch-tag 'tag: TAGNAME' to match
+what appears in git.
  ''')
 
     parser.add_argument('--cnode-pedge',
