@@ -24,25 +24,25 @@ digraph G {
 
    // annotate branches and tags
    "b270710+branchA" [label="branchA", color="lightblue", style=filled, shape=box, height=0.15];
-   "b270710" -> "b270710+branchA" [arrowhead=normal, dir=none];
+   "b270710" -> "b270710+branchA" [arrowhead=normal, color="blue", dir=none];
    {rank=same; "b270710"; "b270710+branchA"};
 
    "5c4f6fa+branchB" [label="branchB", color="lightblue", style=filled, shape=box, height=0.15];
-   "5c4f6fa" -> "5c4f6fa+branchB" [arrowhead=normal, dir=none];
+   "5c4f6fa" -> "5c4f6fa+branchB" [arrowhead=normal, color="blue", dir=none];
    {rank=same; "5c4f6fa"; "5c4f6fa+branchB"};
 
    "8082fda+tag: v1.0a" [label="tag: v1.0a", color="thistle", style=filled, shape=box, height=0.15];
    "8082fda+tag: v1.0" [label="tag: v1.0", color="thistle", style=filled, shape=box, height=0.15];
-   "8082fda+tag: v1.0a" -> "8082fda+tag: v1.0" -> "8082fda" [arrowhead=normal, dir=none];
+   "8082fda+tag: v1.0a" -> "8082fda+tag: v1.0" -> "8082fda" [arrowhead=normal, color="purple", dir=none];
    "8082fda+branchX2" [label="branchX2", color="lightblue", style=filled, shape=box, height=0.15];
    "8082fda+branchX1" [label="branchX1", color="lightblue", style=filled, shape=box, height=0.15];
-   "8082fda" -> "8082fda+branchX1" -> "8082fda+branchX2" [arrowhead=normal, dir=none];
+   "8082fda" -> "8082fda+branchX1" -> "8082fda+branchX2" [arrowhead=normal, color="blue", dir=none];
    {rank=same; "8082fda"; "8082fda+tag: v1.0a"; "8082fda+tag: v1.0"; "8082fda+branchX2"; "8082fda+branchX1"};
 
    "9be50a3+master" [label="master", color="lightblue", style=filled, shape=box, height=0.15];
-   "9be50a3" -> "9be50a3+master" [arrowhead=normal, dir=none];
+   "9be50a3" -> "9be50a3+master" [arrowhead=normal, color="blue", dir=none];
    {rank=same; "9be50a3"; "9be50a3+master"};
 
    // graph label
-   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test03<br/>Purpose: 3 branches, squash enabled, tags and branches<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 08:57:40 PST 2017</font></td></tr></table>>];
+   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test03<br/>Purpose: 3 branches, squash enabled, tags and branches<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 21:45:07 PST 2017</font></td></tr></table>>];
 }

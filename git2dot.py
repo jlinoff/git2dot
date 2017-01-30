@@ -88,7 +88,7 @@ import subprocess
 import sys
 
 
-VERSION = '0.2'
+VERSION = '0.3'
 DEFAULT_GITCMD = 'git log --format="|Record:|%h|%p|%d|%ci%n%b"'
 
 
@@ -593,7 +593,7 @@ def gendot(opts):
     ofp.write('\n')
     ofp.write('   // annotate branches and tags\n')
     first = True
-    for nd in Node.m_list:
+    for idx, nd in enumerate(Node.m_list):
         # technically this is redundant because squashed nodes, by
         # definition, do not have branches or tag refs.
         if nd.is_squashed():
@@ -606,31 +606,53 @@ def gendot(opts):
                 ofp.write('\n')
 
             if len(nd.m_tags) > 0:
-                torank += nd.m_tags
-                for t in nd.m_tags:
-                    # Tag node definitions.
-                    attrs = opts.tnode.format(label=t)
-                    ofp.write('   "{}+{}" {};\n'.format(nd.m_cid, t, attrs))
+                if opts.crunch:
+                    # Create the node name.
+                    tid = 'tid-{:>08}'.format(idx)
+                    label = '\\n'.join(nd.m_tags)
+                    attrs = opts.tnode.format(label=label)
+                    ofp.write('   "{}" {};\n'.format(tid, attrs))
+                    torank += [tid]
 
-                tl = nd.m_tags
-                ofp.write('   "{}+{}"'.format(nd.m_cid, tl[0]))
-                for t in tl[1:]:
-                    ofp.write(' -> "{}+{}"'.format(nd.m_cid, t))
-                ofp.write(' -> "{}"'.format(nd.m_cid))
+                    # Write the connecting edge.
+                    ofp.write('   "{}" -> "{}"'.format(tid, nd.m_cid))
+                else:
+                    torank += nd.m_tags
+                    for t in nd.m_tags:
+                        # Tag node definitions.
+                        attrs = opts.tnode.format(label=t)
+                        ofp.write('   "{}+{}" {};\n'.format(nd.m_cid, t, attrs))
+
+                    tl = nd.m_tags
+                    ofp.write('   "{}+{}"'.format(nd.m_cid, tl[0]))
+                    for t in tl[1:]:
+                        ofp.write(' -> "{}+{}"'.format(nd.m_cid, t))
+                    ofp.write(' -> "{}"'.format(nd.m_cid))
 
                 attrs = opts.tedge.format(label=nd.m_cid)
                 ofp.write(' {};\n'.format(attrs))
 
             if len(nd.m_branches) > 0:
-                torank += nd.m_branches
-                for b in nd.m_branches:
-                    # Branch node definitions.
-                    attrs = opts.bnode.format(label=b)
-                    ofp.write('   "{}+{}" {};\n'.format(nd.m_cid, b, attrs))
+                if opts.crunch:
+                    # Create the node name.
+                    bid = 'bid-{:>08}'.format(idx)
+                    label = '\\n'.join(nd.m_branches)
+                    attrs = opts.bnode.format(label=label)
+                    ofp.write('   "{}" {};\n'.format(bid, attrs))
+                    torank += [bid]
 
-                ofp.write('   "{}"'.format(nd.m_cid))
-                for b in nd.m_branches[::-1]:
-                    ofp.write(' -> "{}+{}"'.format(nd.m_cid, b))
+                    # Write the connecting edge.
+                    ofp.write('   "{}" -> "{}"'.format(nd.m_cid, bid))
+                else:
+                    torank += nd.m_branches
+                    for b in nd.m_branches:
+                        # Branch node definitions.
+                        attrs = opts.bnode.format(label=b)
+                        ofp.write('   "{}+{}" {};\n'.format(nd.m_cid, b, attrs))
+
+                    ofp.write('   "{}"'.format(nd.m_cid))
+                    for b in nd.m_branches[::-1]:
+                        ofp.write(' -> "{}+{}"'.format(nd.m_cid, b))
 
                 attrs = opts.bedge.format(label=nd.m_cid)
                 ofp.write(' {};\n'.format(attrs))
@@ -638,7 +660,10 @@ def gendot(opts):
             # Make sure that they line up by putting them in the same rank.
             ofp.write('   {{rank=same; "{}"'.format(torank[0]))
             for cid in torank[1:]:
-                ofp.write('; "{}+{}"'.format(nd.m_cid, cid))
+                if opts.crunch:
+                    ofp.write('; "{}"'.format(cid))
+                else:
+                    ofp.write('; "{}+{}"'.format(nd.m_cid, cid))
             ofp.write('};\n')
 
     # Align nodes by commit date.
@@ -872,7 +897,7 @@ Default: %(default)s
     parser.add_argument('--bedge',
                         action='store',
                         metavar=('DOT_ATTR_LIST'),
-                        default='[arrowhead=normal, dir=none]',
+                        default='[arrowhead=normal, color="blue", dir=none]',
                         help='''Define the bedge attributes.
 The bedge is any edge that connects to or from a bnode (see --bnode for details).
 
@@ -934,6 +959,14 @@ Or to change the shape and fillcolor:
 The available attributes are described here: http://www.graphviz.org/doc/info/attrs.html.
 
 Default: %(default)s
+ ''')
+
+    parser.add_argument('--crunch',
+                        action='store_true',
+                        help='''Crunch branches and tags.
+Crunch branches into a single node and tags into a single.
+This works around unwieldy placements of the individual
+nodes by dot in large graphs.
  ''')
 
     x = ['graph[rankdir="LR", bgcolor="white"]',
@@ -1227,7 +1260,7 @@ Default: %(default)s
     parser.add_argument('--tedge',
                         action='store',
                         metavar=('DOT_ATTR_LIST'),
-                        default='[arrowhead=normal, dir=none]',
+                        default='[arrowhead=normal, color="purple", dir=none]',
                         help='''Define the tedge attributes.
 The tedge is any edge that connects to or from a tnode (see --tnode for details).
 
