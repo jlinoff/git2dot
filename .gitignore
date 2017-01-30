@@ -1,0 +1,8 @@
+*~
+# Ignore generated files.
+example/example*.dot*
+example/example*.html
+example/README
+test/test*.dot*
+test/test*.html
+
