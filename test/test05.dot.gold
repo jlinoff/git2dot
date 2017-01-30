@@ -25,15 +25,15 @@ digraph G {
 
    // annotate branches and tags
    "e3bcc51+master" [label="master", color="lightblue", style=filled, shape=box, height=0.15];
-   "e3bcc51" -> "e3bcc51+master" [arrowhead=normal, color="blue", dir=none];
+   "e3bcc51" -> "e3bcc51+master" [arrowhead=normal, color="lightblue", dir=none];
    {rank=same; "e3bcc51"; "e3bcc51+master"};
 
    "5cfd6f5+branchB" [label="branchB", color="lightblue", style=filled, shape=box, height=0.15];
-   "5cfd6f5" -> "5cfd6f5+branchB" [arrowhead=normal, color="blue", dir=none];
+   "5cfd6f5" -> "5cfd6f5+branchB" [arrowhead=normal, color="lightblue", dir=none];
    {rank=same; "5cfd6f5"; "5cfd6f5+branchB"};
 
    "29a00f8+branchA" [label="branchA", color="lightblue", style=filled, shape=box, height=0.15];
-   "29a00f8" -> "29a00f8+branchA" [arrowhead=normal, color="blue", dir=none];
+   "29a00f8" -> "29a00f8+branchA" [arrowhead=normal, color="lightblue", dir=none];
    {rank=same; "29a00f8"; "29a00f8+branchA"};
 
    "42b269d+tag: v1.0a" [label="tag: v1.0a", color="thistle", style=filled, shape=box, height=0.15];
@@ -41,9 +41,9 @@ digraph G {
    "42b269d+tag: v1.0a" -> "42b269d+tag: v1.0" -> "42b269d" [arrowhead=normal, dir=none, style=dotted, color="blue"];
    "42b269d+branchX2" [label="branchX2", color="lightblue", style=filled, shape=box, height=0.15];
    "42b269d+branchX1" [label="branchX1", color="lightblue", style=filled, shape=box, height=0.15];
-   "42b269d" -> "42b269d+branchX1" -> "42b269d+branchX2" [arrowhead=normal, color="blue", dir=none];
+   "42b269d" -> "42b269d+branchX1" -> "42b269d+branchX2" [arrowhead=normal, color="lightblue", dir=none];
    {rank=same; "42b269d"; "42b269d+tag: v1.0a"; "42b269d+tag: v1.0"; "42b269d+branchX2"; "42b269d+branchX1"};
 
    // graph label
-   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test05<br/>Purpose: 3 branches, squash, tags and branches, splines=polyline, @CHID@, tedge<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 21:45:09 PST 2017</font></td></tr></table>>];
+   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test05<br/>Purpose: 3 branches, squash, tags and branches, splines=polyline, @CHID@, tedge<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 21:57:06 PST 2017</font></td></tr></table>>];
 }

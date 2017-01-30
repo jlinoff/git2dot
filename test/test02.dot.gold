@@ -32,25 +32,25 @@ digraph G {
 
    // annotate branches and tags
    "5d7efc0+branchB" [label="branchB", color="lightblue", style=filled, shape=box, height=0.15];
-   "5d7efc0" -> "5d7efc0+branchB" [arrowhead=normal, color="blue", dir=none];
+   "5d7efc0" -> "5d7efc0+branchB" [arrowhead=normal, color="lightblue", dir=none];
    {rank=same; "5d7efc0"; "5d7efc0+branchB"};
 
    "11fe857+master" [label="master", color="lightblue", style=filled, shape=box, height=0.15];
-   "11fe857" -> "11fe857+master" [arrowhead=normal, color="blue", dir=none];
+   "11fe857" -> "11fe857+master" [arrowhead=normal, color="lightblue", dir=none];
    {rank=same; "11fe857"; "11fe857+master"};
 
    "e5ff223+branchA" [label="branchA", color="lightblue", style=filled, shape=box, height=0.15];
-   "e5ff223" -> "e5ff223+branchA" [arrowhead=normal, color="blue", dir=none];
+   "e5ff223" -> "e5ff223+branchA" [arrowhead=normal, color="lightblue", dir=none];
    {rank=same; "e5ff223"; "e5ff223+branchA"};
 
    "e18cd60+tag: v1.0a" [label="tag: v1.0a", color="thistle", style=filled, shape=box, height=0.15];
    "e18cd60+tag: v1.0" [label="tag: v1.0", color="thistle", style=filled, shape=box, height=0.15];
-   "e18cd60+tag: v1.0a" -> "e18cd60+tag: v1.0" -> "e18cd60" [arrowhead=normal, color="purple", dir=none];
+   "e18cd60+tag: v1.0a" -> "e18cd60+tag: v1.0" -> "e18cd60" [arrowhead=normal, color="thistle", dir=none];
    "e18cd60+branchX2" [label="branchX2", color="lightblue", style=filled, shape=box, height=0.15];
    "e18cd60+branchX1" [label="branchX1", color="lightblue", style=filled, shape=box, height=0.15];
-   "e18cd60" -> "e18cd60+branchX1" -> "e18cd60+branchX2" [arrowhead=normal, color="blue", dir=none];
+   "e18cd60" -> "e18cd60+branchX1" -> "e18cd60+branchX2" [arrowhead=normal, color="lightblue", dir=none];
    {rank=same; "e18cd60"; "e18cd60+tag: v1.0a"; "e18cd60+tag: v1.0"; "e18cd60+branchX2"; "e18cd60+branchX1"};
 
    // graph label
-   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test02<br/>Purpose: 3 branches, no squash, tags and branches<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 21:45:05 PST 2017</font></td></tr></table>>];
+   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test02<br/>Purpose: 3 branches, no squash, tags and branches<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 21:57:02 PST 2017</font></td></tr></table>>];
 }

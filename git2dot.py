@@ -897,7 +897,7 @@ Default: %(default)s
     parser.add_argument('--bedge',
                         action='store',
                         metavar=('DOT_ATTR_LIST'),
-                        default='[arrowhead=normal, color="blue", dir=none]',
+                        default='[arrowhead=normal, color="lightblue", dir=none]',
                         help='''Define the bedge attributes.
 The bedge is any edge that connects to or from a bnode (see --bnode for details).
 
@@ -1260,7 +1260,7 @@ Default: %(default)s
     parser.add_argument('--tedge',
                         action='store',
                         metavar=('DOT_ATTR_LIST'),
-                        default='[arrowhead=normal, color="purple", dir=none]',
+                        default='[arrowhead=normal, color="thistle", dir=none]',
                         help='''Define the tedge attributes.
 The tedge is any edge that connects to or from a tnode (see --tnode for details).
 

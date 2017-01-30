@@ -5,43 +5,43 @@ digraph G {
    splines="true";
 
    // label cnode, mnode and snodes
-   "da56181" [label="master - third\n2017-01-29 18:53:54", shape="diamond", color="magenta"];
-   "31c25c7" [label="branchB - seventh\n2017-01-29 18:53:53", shape="diamond", color="magenta"];
-   "1edf110" [label="branchB - sixth\n2017-01-29 18:53:52", color="tomato"];
-   "0c8343c" [label="branchB - first\n2017-01-29 18:53:47", color="tomato"];
-   "6ce72b1" [label="branchA - second\n2017-01-29 18:53:46\n001", shape="diamond", color="magenta"];
-   "33b9115" [label="branchA - first\n2017-01-29 18:53:45", shape="diamond", color="magenta"];
-   "f567436" [label="master - second\n2017-01-29 18:53:44\n001", shape="diamond", color="green"];
-   "af95014" [label="master - first\n2017-01-29 18:53:43", shape="diamond", color="magenta"];
+   "f31e3f0" [label="master - third\n2017-01-29 21:56:51", shape="diamond", color="magenta"];
+   "03d9d13" [label="branchB - seventh\n2017-01-29 21:56:50", shape="diamond", color="magenta"];
+   "346c800" [label="branchB - sixth\n2017-01-29 21:56:49", color="tomato"];
+   "c9d7d96" [label="branchB - first\n2017-01-29 21:56:44", color="tomato"];
+   "5797f3a" [label="branchA - second\n2017-01-29 21:56:43\n001", shape="diamond", color="magenta"];
+   "2c0e53b" [label="branchA - first\n2017-01-29 21:56:42", shape="diamond", color="magenta"];
+   "a37ff2c" [label="master - second\n2017-01-29 21:56:41\n001", shape="diamond", color="green"];
+   "5b0be99" [label="master - first\n2017-01-29 21:56:40", shape="diamond", color="magenta"];
 
    // edges
-   "f567436" -> "da56181" ;
-   "1edf110" -> "31c25c7" ;
-   "0c8343c" -> "1edf110" [label="6", style=dotted, arrowhead="none", dir="none"];
-   "f567436" -> "0c8343c" ;
-   "33b9115" -> "6ce72b1" ;
-   "f567436" -> "33b9115" ;
-   "af95014" -> "f567436" ;
+   "a37ff2c" -> "f31e3f0" ;
+   "346c800" -> "03d9d13" ;
+   "c9d7d96" -> "346c800" [label="6", style=dotted, arrowhead="none", dir="none"];
+   "a37ff2c" -> "c9d7d96" ;
+   "2c0e53b" -> "5797f3a" ;
+   "a37ff2c" -> "2c0e53b" ;
+   "5b0be99" -> "a37ff2c" ;
 
    // annotate branches and tags
    "bid-00000000" [label="master", color="lightblue", style=filled, shape=box, height=0.15];
-   "da56181" -> "bid-00000000" [arrowhead=normal, color="blue", dir=none];
-   {rank=same; "da56181"; "bid-00000000"};
+   "f31e3f0" -> "bid-00000000" [arrowhead=normal, color="lightblue", dir=none];
+   {rank=same; "f31e3f0"; "bid-00000000"};
 
    "bid-00000001" [label="branchB", color="lightblue", style=filled, shape=box, height=0.15];
-   "31c25c7" -> "bid-00000001" [arrowhead=normal, color="blue", dir=none];
-   {rank=same; "31c25c7"; "bid-00000001"};
+   "03d9d13" -> "bid-00000001" [arrowhead=normal, color="lightblue", dir=none];
+   {rank=same; "03d9d13"; "bid-00000001"};
 
    "bid-00000008" [label="branchA", color="lightblue", style=filled, shape=box, height=0.15];
-   "6ce72b1" -> "bid-00000008" [arrowhead=normal, color="blue", dir=none];
-   {rank=same; "6ce72b1"; "bid-00000008"};
+   "5797f3a" -> "bid-00000008" [arrowhead=normal, color="lightblue", dir=none];
+   {rank=same; "5797f3a"; "bid-00000008"};
 
    "tid-00000010" [label="tag: v1.0a\ntag: v1.0", color="thistle", style=filled, shape=box, height=0.15];
-   "tid-00000010" -> "f567436" [arrowhead=normal, color="purple", dir=none];
+   "tid-00000010" -> "a37ff2c" [arrowhead=normal, color="thistle", dir=none];
    "bid-00000010" [label="branchX2\nbranchX1", color="lightblue", style=filled, shape=box, height=0.15];
-   "f567436" -> "bid-00000010" [arrowhead=normal, color="blue", dir=none];
-   {rank=same; "f567436"; "tid-00000010"; "bid-00000010"};
+   "a37ff2c" -> "bid-00000010" [arrowhead=normal, color="lightblue", dir=none];
+   {rank=same; "a37ff2c"; "tid-00000010"; "bid-00000010"};
 
    // graph label
-   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test08<br/>Purpose: 3 branches, no squash, tags and branches, splines=true, cnode and mnode, crunch<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 21:45:13 PST 2017</font></td></tr></table>>];
+   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test08<br/>Purpose: 3 branches, no squash, tags and branches, splines=true, cnode and mnode, crunch<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 21:57:10 PST 2017</font></td></tr></table>>];
 }
