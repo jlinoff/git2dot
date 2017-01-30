@@ -183,20 +183,20 @@ git commit -m 'master - third'
 You can verify the repo structure using something like `git log`.
 ```bash
 $ git log --graph --oneline --decorate --all
-* 7fd1f5d (HEAD -> master) master - third
-| * 98b994f (branchB) branchB - seventh
-| * 00dda04 branchB - sixth
-| * 01895af branchB - fifth
-| * 84fa67d branchB - fourth
-| * f8e33ec branchB - third
-| * 7b66d32 branchB - second
-| * 3385e18 branchB - first
+* da0165b (HEAD -> master) master - third
+| * 8e3cf50 (branchB) branchB - seventh
+| * e0420c1 branchB - sixth
+| * f51497b branchB - fifth
+| * cee652e branchB - fourth
+| * 2fc95e6 branchB - third
+| * 9c654d8 branchB - second
+| * 33fbc07 branchB - first
 |/  
-| * cced7be (branchA) branchA - second
-| * 843d5ce branchA - first
+| * 20ea3d2 (branchA) branchA - second
+| * 71a0d0c branchA - first
 |/  
-* 46407c4 (tag: v1.0a, tag: v1.0, branchX2, branchX1) master - second
-* 84ca47b master - first
+* ecdc7dc (tag: v1.0a, tag: v1.0, branchX2, branchX1) master - second
+* c8ae444 master - first
 ```
 
 Now run the git2dot tool to generate PNG, HTML and SVG files.
@@ -237,9 +237,9 @@ $  python -m SimpleHTTPServer 8090
 
 After that you can browse to http://localhost:8090/example.html and you will see this.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22406665/d5f7ca60-e60b-11e6-957f-ff6a9536b615.png" width="1100" alt="example">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22431235/b585cf7e-e6c5-11e6-8f17-6b99847bfe51.png" width="1100" alt="example">
 
-As you can see, there is a long chain of commits, to run it again using the squash option.
+As you can see, there is a long chain of commits, to run it again using the `--squash` option.
 
 ```bash
 $ git2dot.py --squash --png --svg --html example1.html example1.dot
@@ -247,6 +247,17 @@ $ git2dot.py --squash --png --svg --html example1.html example1.dot
 
 And browse to http://localhost:8090/example1.html and you will see this.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22406722/df2c38ae-e60c-11e6-91a8-6890e513cb36.png" width="1100" alt="example1">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22431252/c5077344-e6c5-11e6-95b0-54cd02d11aa2.png" width="1100" alt="example1">
 
 Which is a cleaner view of the overall structure.
+
+You will also note that there are two branches and two tags on *ecdc7dc*. They can be collapsed using the `--crunch` option like this.
+
+```bash
+$ git2dot.py --crunch --squash --png --svg --html example1.html example1.dot
+```
+When you browse to http://localhost:8090/example2.html and you will see this.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22431258/c89d7e7c-e6c5-11e6-826e-cf7450b9f125.png" width="1100" alt="example2">
+
+For such a small graph the crunch operation doesn't really make things simpler but for larger graphs where dot may move the branch and tag information around, it can be a much cleaner view.
