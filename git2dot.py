@@ -81,7 +81,8 @@ If you want to limit the analysis to a small set of branches or tag
 you can used the --choose-branch and choose-tag options. These options
 prune the graph so that only parents of commits with the choose branch
 or tag ids are included in the graph. This gives you more detail
-controlled that the git options allowed in the --range command.
+controlled that the git options allowed in the --range command. It
+is very useful for determining where branches occurred.
 
 You can choose to keep the git output to re-use multiple times with
 different display options or to share by specifying the -k (--keep)

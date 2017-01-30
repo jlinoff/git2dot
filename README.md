@@ -93,6 +93,13 @@ use the `--since` and `--until` options.
 If you want to limit the analysis to commits in a certain range use
 the `--range` option.
 
+If you want to limit the analysis to a small set of branches or tag
+you can used the `--choose-branch` and `choose-tag` options. These options
+prune the graph so that only parents of commits with the choose branch
+or tag ids are included in the graph. This gives you more detail
+controlled that the git options allowed in the --range command. It
+is very useful for determining where branches occurred.
+
 You can choose to keep the git output to re-use multiple times with
 different display options or to share by specifying the `-k` (`--keep`)
 option.
@@ -261,3 +268,9 @@ When you browse to http://localhost:8090/example2.html and you will see this.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22431258/c89d7e7c-e6c5-11e6-826e-cf7450b9f125.png" width="1100" alt="example2">
 
 For such a small graph the crunch operation doesn't really make things simpler but for larger graphs where dot may move the branch and tag information around, it can be a much cleaner view.
+
+There are two more options you will want to think about for make large graphs
+more readable: `--choose-branch` and `--choose-tag`. As described earlier,
+they prune the graph so that is only considers the parent chains of the
+specified branches or tags. This can be very useful to determining where
+branches occurred.
