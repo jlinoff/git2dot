@@ -83,6 +83,10 @@ If you have long chains of single commits use the `--squash` option to
 squash out the middle ones. That is generally helpful for filtering
 out extraneous commit details for moderately sized repos.
 
+If you find that dot is placing your bnode and tnode nodes in odd
+places, use the `--crunch` option to collapse the bnode nodes into
+a single node and the tnodes into a single node for each commit.
+
 If you want to limit the analysis to commits between certain dates,
 use the `--since` and `--until` options.
 
