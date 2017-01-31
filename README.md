@@ -269,8 +269,157 @@ When you browse to http://localhost:8090/example2.html and you will see this.
 
 For such a small graph the crunch operation doesn't really make things simpler but for larger graphs where dot may move the branch and tag information around, it can be a much cleaner view.
 
+## Example 2 - pruning the graph
+
 There are two more options you will want to think about for make large graphs
 more readable: `--choose-branch` and `--choose-tag`. As described earlier,
 they prune the graph so that is only considers the parent chains of the
 specified branches or tags. This can be very useful to determining where
 branches occurred.
+
+This example shows how it works.
+
+First you create a repository like this.
+
+```bash
+git init
+
+echo 'A' >example2.txt
+git add example2.txt
+git commit -m 'master - first'
+sleep 1
+
+echo 'B' >>example2.txt
+git add example2.txt
+git commit -m 'master - second'
+sleep 1
+
+# tag the basis for all of the branches
+git tag -a 'v1.0' -m 'Initial version.'
+git tag -a 'v1.0a' -m 'Another version.'
+
+git checkout -b branchX1
+git checkout master
+git checkout -b branchX2
+
+git checkout master
+git checkout -b branchA
+echo 'C' >> example2.txt
+git add example2.txt
+git commit -m 'branchA - first'
+sleep 1
+
+echo 'D' >> example2.txt
+git add example2.txt
+git commit -m 'branchA - second'
+sleep 1
+
+echo 'E' >> example2.txt
+git add example2.txt
+git commit -m 'branchA - third'
+sleep 1
+
+echo 'F' >> example2.txt
+git add example2.txt
+git commit -m 'branchA - fourth'
+sleep 1
+
+git checkout master
+git checkout -b branchB
+echo 'G' >> example2.txt
+git add example2.txt
+git commit -m 'branchB - first'
+sleep 1
+
+echo 'H' >> example2.txt
+git add example2.txt
+git commit -m 'branchB - second'
+sleep 1
+
+echo 'I' >> example2.txt
+git add example2.txt
+git commit -m 'branchB - third'
+sleep 1
+
+echo 'J' >> example2.txt
+git add example2.txt
+git commit -m 'branchB - fourth'
+sleep 1
+git tag -a 'v2.0a' -m 'Initial version.'
+
+echo 'K' >> example2.txt
+git add example2.txt
+git commit -m 'branchB - fifth'
+sleep 1
+
+echo 'L' >> example2.txt
+git add example2.txt
+git commit -m 'branchB - sixth'
+sleep 1
+
+echo 'M' >> example2.txt
+git add example2.txt
+git commit -m 'branchB - seventh'
+sleep 1
+
+git checkout master
+echo 'N' >> example2.txt
+git add example2.txt
+git commit -m 'master - third'
+sleep 1
+
+echo 'O' >> example2.txt
+git add example2.txt
+git commit -m 'master - fourth'
+```
+
+You can confirm its layout like this.
+
+```bash
+$ $ git log --graph --oneline --decorate --all --topo-order
+* e4bb699 (HEAD -> master, origin/master, origin/HEAD) Add --topo-order to the default range
+* 01bb6de Update comments
+* c0bf31e Update comments
+* f6f32ac (tag: v0.4) Update to describe --choose-* functionality
+* 81fc41c v0.4 - added --choose-* support
+*   c50cded (tag: v0.3) Merge branch 'master' of https://github.com/jlinoff/git2dot
+|\  
+| * 3c52eae Update README.md
+* | be89609 Add example
+|/  
+* 680b2e5 Update documentation
+* 0b7fed3 Update README.txt
+* 47f1430 Initial load
+* b4c73c8 Update README.md
+* 54632ac Change bedge/tedge color defaults
+* 0136d78 Add support for --crunch
+* 10eaf83 Update README.md
+* 736b75a Fix bug in --align-by-date handling
+* 4fac1b8 Fix bug in --align-by-date handling
+* fd20bac Fix bug in --align-by-date handling
+* e15199f Update README.md
+* a4a6fa8 Initial load
+* da4e1d3 Update README.md
+* ba50fcf Update README.md
+* 2a8038c Update README.md
+* 800700f Update README.md
+* a3a4ae0 Initial commit
+```
+
+Create the graph without pruning.
+
+```bash
+$ ../git2dot.py --graph-label 'graph[label="example2 - compressed initial state"]' --crunch --squash --png --svg --html example2-2.html example2-2.dot
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22488086/0d34a592-e7c5-11e6-91d8-720f21e357f6.png" width="1100" alt="example2-2">
+
+Create the graph with pruning.
+
+```bash
+$ ../git2dot.py --graph-label 'graph[label="example2 - compressed pruned state"]' --choose-branch 'branchA' --choose-tag 'tag: v2.0a' --crunch --squash --png --svg --html example2-4.html example2-4.dot
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22488091/11ae8912-e7c5-11e6-9818-1c8e9c607182.png" width="1100" alt="example2-4">
+
+As you can see, branchB has been completely removed in the second one.
