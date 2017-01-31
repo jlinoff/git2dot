@@ -13,4 +13,16 @@ URLs if you specified port 8090.
 
 1. http://localhost:8090/example.html
 2. http://localhost:8090/example1.html
-3. http://localhost:8090/example3.html
+3. http://localhost:8090/example2.html
+
+The example2.sh scripts 4 additional HTML files:
+
+1. http://localhost:8090/example2-1.html
+2. http://localhost:8090/example2-2.html
+3. http://localhost:8090/example2-3.html
+4. http://localhost:8090/example2-4.html
+
+See the project README for more information at
+https://github.com/jlinoff/git2dot.
+
+
