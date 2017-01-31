@@ -94,7 +94,7 @@ If you want to limit the analysis to commits in a certain range use
 the `--range` option.
 
 If you want to limit the analysis to a small set of branches or tags
-you can use the `--choose-branch` and `choose-tag` options. These options
+you can use the `--choose-branch` and `--choose-tag` options. These options
 prune the graph so that only parents of commits with the choose branch
 or tag ids are included in the graph. This gives you more detail
 controlled that the git options allowed in the --range command. It
