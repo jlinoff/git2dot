@@ -1019,6 +1019,15 @@ def getopts():
    # Example 11: only report the commits associated with three branches:
                  origin/1.0.0, origin/1.0.1 and origin/1.1.0
    $ {0} --choose-branch origin/1.0.0 --choose-branch origin/1.0.1 --choose-branch origin/1.1.0 git01.dot
+
+COPYRIGHT:
+   Copyright (c) 2017 Joe Linoff, all rights reserved
+
+LICENSE:
+   MIT Open Source
+
+PROJECT:
+   https://github.com/jlinoff/git2dot
  '''.format(base)
     afc = argparse.RawTextHelpFormatter
     parser = argparse.ArgumentParser(formatter_class=afc,
