@@ -99,8 +99,9 @@ import subprocess
 import sys
 
 
-VERSION = '0.4'
-DEFAULT_GITCMD = 'git log --format="|Record:|%h|%p|%d|%ci%n%b"'
+VERSION = '0.5'
+DEFAULT_GITCMD = 'git log --format="|Record:|%h|%p|%d|%ci%n%b"' # --gitcmd
+DEFAULT_RANGE = '--all --topo-order'  # --range
 
 
 class Node:
@@ -368,7 +369,7 @@ def read(opts):
                 warn('--since ignored when -g is specified')
             if opts.until != '':
                 warn('--until ignored when -g is specified')
-            if opts.range != '--all':
+            if opts.range != DEFAULT_RANGE:
                 warn('--range ignored when -g is specified')
 
         infov(opts, 'running command: {}'.format(cmd))
@@ -1220,9 +1221,9 @@ contains @FOO which is probably not what you want.
 If you override this command, make sure that the output syntax is the
 same as the default command.
 
-The example below shows a simple that sets since:
+The example below shows a simple gitcmd that sets since:
 
-      -g 'git log --format="|Record:|%h|%p|%d|%ci%n%b" --since 2016-01-01 --all'
+      -g 'git log --format="|Record:|%h|%p|%d|%ci%n%b" --since 2016-01-01 --all --topo-order'
 
 This is very powerful, you can specify any git command at all to
 replace git-log but if you do, remember that you must set up the
@@ -1377,7 +1378,7 @@ It is the same as running "dot -Tpng -O DOT_FILE".
     parser.add_argument('--range',
                         action='store',
                         metavar=('GIT-RANGE'),
-                        default='--all',
+                        default=DEFAULT_RANGE,
                         help='''Only consider git commits that fall within the range.
 These are command line arguments used for defining the range.
 By default use all commits in the range.
