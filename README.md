@@ -430,3 +430,4 @@ As you can see, branchB has been completely removed in the second one.
 2. For graphs that have multiple branches and tags on the same commits consuder using the `--crunch` option.
 3. If you only want to see the combined history of a few branches or tags (like release branches) consider using the `--choose-branch` and `--choose-tag` options to prune the graph.
 4. Use the `--since` option if you don't care about ancient history.
+5. The `--graph-label` option can be useful and can be very simple: `--graph-label 'graph[label="MY LABEL"]'`.
