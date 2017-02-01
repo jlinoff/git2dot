@@ -1102,7 +1102,7 @@ Default: %(default)s
                         default=[],
                         help='''Choose a branch to include.
 By default all branches are included. When you select this option, you
-limit the output to commit nodes that in the branch parent chain.
+limit the output to commit nodes that are in the branch parent chain.
 
 You can use it to select multiple branches to graph which basically
 tells the tool to prune all other branches as endpoints.
@@ -1116,7 +1116,7 @@ This is very useful for comparing commits between related branches.
                         default=[],
                         help='''Choose a tag to include.
 By default all tags are included. When you select this option, you
-limit the output to commit nodes that in the tag parent chain.
+limit the output to commit nodes that are in the tag parent chain.
 
 You can use it to select multiple tags to graph which basically
 tells the tool to prune all other tags as endpoints.
