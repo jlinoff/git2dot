@@ -423,3 +423,10 @@ $ ../git2dot.py --graph-label 'graph[label="example2 - compressed pruned state"]
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22488091/11ae8912-e7c5-11e6-9818-1c8e9c607182.png" width="1100" alt="example2-4">
 
 As you can see, branchB has been completely removed in the second one.
+
+## Hints
+
+1. For large graphs consider using the `--squash` option.
+2. For graphs that have multiple branches and tags on the same commits consuder using the `--crunch` option.
+3. If you only want to see the combined history of a few branches or tags (like release branches) consider using the `--choose-branch` and `--choose-tag` options.
+4. Use the `--since` option if you don't care about ancient history.
