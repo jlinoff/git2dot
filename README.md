@@ -271,9 +271,9 @@ For such a small graph the crunch operation doesn't really make things simpler b
 
 ## Example 2 - pruning the graph
 
-There are two more options you will want to think about for make large graphs
+There are two more options you will want to think about for making large graphs
 more readable: `--choose-branch` and `--choose-tag`. As described earlier,
-they prune the graph so that is only considers the parent chains of the
+they prune the graph so that it only considers the parent chains of the
 specified branches or tags. This can be very useful to determining where
 branches occurred.
 
