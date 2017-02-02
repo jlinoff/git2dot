@@ -939,10 +939,6 @@ def getopts():
     '''
     Get the command line options using argparse.
     '''
-    def action_get_conf():
-        '''
-        Verify that the key is valid.
-        '''
     # Trick to capitalize the built-in headers.
     # Unfortunately I can't get rid of the ":" reliably.
     def gettext(s):
