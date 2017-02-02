@@ -99,7 +99,7 @@ import subprocess
 import sys
 
 
-VERSION = '0.5'
+VERSION = '0.6'
 DEFAULT_GITCMD = 'git log --format="|Record:|%h|%p|%d|%ci%n%b"' # --gitcmd
 DEFAULT_RANGE = '--all --topo-order'  # --range
 
@@ -884,8 +884,8 @@ def html(opts):
 <html>
   <head>
     <meta charset="UTF-8">
-      <title>{4}</title>
-      {3}
+    <title>{4}</title>
+    {3}
   </head>
   <body>
     <h3>{4}</h3>
@@ -915,7 +915,7 @@ def html(opts):
     </script>
   </body>
 </html>
-'''.format(svg, js, opts.html_min_height, '      \n'.join([x for x in opts.html_head]), opts.html_title))
+'''.format(svg, js, opts.html_min_height, '    \n'.join([x for x in opts.html_head]), opts.html_title))
         except IOError as e:
             err('HTML write failed: {}'.format(e))
 
