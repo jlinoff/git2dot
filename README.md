@@ -430,6 +430,12 @@ Here is the generated image of the git2dot development tree for v0.6.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22603307/b1538d68-e9fb-11e6-859b-7c0387e9b972.png" width="1100" alt="dog food">
 
+It was generated with this command.
+
+```bash
+$ ./git2dot.py -s -c --png --graph-label 'graph[label="git2dot v0.6", fontsize="18"]' git.dot
+```
+
 ## Hints
 
 1. For large graphs consider using the `--squash` option.
