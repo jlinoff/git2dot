@@ -1158,7 +1158,7 @@ The available attributes are described here: http://www.graphviz.org/doc/info/at
 Default: %(default)s
  ''')
 
-    parser.add_argument('--crunch',
+    parser.add_argument('-c', '--crunch',
                         action='store_true',
                         help='''Crunch branches and tags.
 Crunch branches into a single node and tags into a single.
