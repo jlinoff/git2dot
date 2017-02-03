@@ -424,6 +424,12 @@ $ ../git2dot.py --graph-label 'graph[label="example2 - compressed pruned state"]
 
 As you can see, branchB has been completely removed in the second one.
 
+## Eat your own dog food
+
+Here is the generated image of the git2dot development tree for v0.6.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22603307/b1538d68-e9fb-11e6-859b-7c0387e9b972.png" width="1100" alt="dog food">
+
 ## Hints
 
 1. For large graphs consider using the `--squash` option.
