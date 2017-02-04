@@ -99,7 +99,7 @@ import subprocess
 import sys
 
 
-VERSION = '0.6'
+VERSION = '0.7'
 DEFAULT_GITCMD = 'git log --format="|Record:|%h|%p|%d|%ci%n%b"' # --gitcmd
 DEFAULT_RANGE = '--all --topo-order'  # --range
 
@@ -689,6 +689,14 @@ def gendot(opts):
     except IOError as e:
         err('file open failed: {}'.format(e))
 
+    # Keep track of the node information so
+    # that it can be reported at the end.
+    summary = {'num_graph_commit_nodes': 0,
+               'num_graph_merge_nodes': 0,
+               'num_graph_squash_nodes': 0,
+               'total_graph_commit_nodes': 0,  # sum of commit, merge and squash nodes
+               'total_commits': 0}   # total nodes with no squashing
+
     ofp.write('digraph G {\n')
     for v in opts.dot_option:
         ofp.write('   {}'.format(v))
@@ -705,14 +713,22 @@ def gendot(opts):
             label = '\\n'.join(nd.m_extra)
             attrs = opts.mnode.format(label=label)
             ofp.write('   "{}" {};\n'.format(nd.m_cid, attrs))
+            summary['num_graph_merge_nodes'] += 1
+            summary['total_graph_commit_nodes'] += 1
+            summary['total_commits'] += 1
         elif nd.is_squashed_head() or nd.is_squashed_tail():
             label = '\\n'.join(nd.m_extra)
             attrs = opts.snode.format(label=label)
             ofp.write('   "{}" {};\n'.format(nd.m_cid, attrs))
+            summary['num_graph_squash_nodes'] += 1
+            summary['total_graph_commit_nodes'] += 1
         else:
             label = '\\n'.join(nd.m_extra)
             attrs = opts.cnode.format(label=label)
             ofp.write('   "{}" {};\n'.format(nd.m_cid, attrs))
+            summary['num_graph_commit_nodes'] += 1
+            summary['total_graph_commit_nodes'] += 1
+            summary['total_commits'] += 1
 
     infov(opts, 'defining edges')
     ofp.write('\n')
@@ -728,6 +744,7 @@ def gendot(opts):
             # a squash edge between the head and tail.
             attrs = opts.sedge.format(label=nd.m_chain_size)
             ofp.write('   "{}" -> "{}" {};\n'.format(nd.m_cid, nd.m_chain_tail.m_cid, attrs))
+            summary['total_commits'] += nd.m_chain_size
 
         # Create the edges to the parents.
         for pid in nd.m_parents:
@@ -864,6 +881,11 @@ def gendot(opts):
         ofp.write('\n')
 
     ofp.write('}\n')
+
+    # Output the summary data.
+    for k in sorted(summary, key=str.lower):
+        v = summary[k]
+        ofp.write('// summary:{} {}\n'.format(k, v))
     ofp.close()
 
 

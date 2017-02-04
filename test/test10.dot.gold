@@ -40,5 +40,10 @@ digraph G {
    {rank=same; "78d57e4"; "78d57e4+tag: v2.0a"};
 
    // graph label
-   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test10<br/>Purpose: 3 branches, tags and branches, choose<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Mon Jan 30 13:20:40 PST 2017</font></td></tr></table>>];
+   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test10<br/>Purpose: 3 branches, tags and branches, choose<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sat Feb  4 09:13:46 PST 2017</font></td></tr></table>>];
 }
+// summary:num_graph_commit_nodes 3
+// summary:num_graph_merge_nodes 1
+// summary:num_graph_squash_nodes 4
+// summary:total_commits 10
+// summary:total_graph_commit_nodes 8

@@ -22,5 +22,10 @@ digraph G {
    {rank=same; "03d6336"; "03d6336+tag: v0.1"};
 
    // graph label
-   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test01<br/>Purpose: 3 commits on master, 1 tag<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sun Jan 29 21:57:01 PST 2017</font></td></tr></table>>];
+   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test01<br/>Purpose: 3 commits on master, 1 tag<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sat Feb  4 09:13:35 PST 2017</font></td></tr></table>>];
 }
+// summary:num_graph_commit_nodes 3
+// summary:num_graph_merge_nodes 0
+// summary:num_graph_squash_nodes 0
+// summary:total_commits 3
+// summary:total_graph_commit_nodes 3
