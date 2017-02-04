@@ -444,3 +444,29 @@ $ ./git2dot.py -s -c --png --graph-label 'graph[label="git2dot v0.6", fontsize="
 4. If you only want to see the combined history of a few branches or tags (like release branches) consider using the `--choose-branch` and `--choose-tag` options to prune the graph.
 5. Use the `--since` option if you don't care about ancient history.
 6. The `--graph-label` option can be useful and can be very simple: `--graph-label 'graph[label="MY LABEL"]'`.
+
+## Summary data
+The generated dot file has summary fields at the end that can be useful for post processing.
+
+The fields are written as dot comments like this.
+
+```
+// summary:num_graph_commit_nodes 5
+// summary:num_graph_merge_nodes 1
+// summary:num_graph_squash_nodes 2
+// summary:total_commits 12
+// summary:total_graph_commit_nodes 8
+```
+
+They are described in the table below.
+
+| Field | Description |
+| ----- | ----------- |
+| `// summary:num_graph_commit_nodes INT` | The total number of simple commit nodes in the graph. |
+| `// summary:num_graph_merge_nodes INT` | The total nummber of merge commit nodes in the graph. |
+| `// summary:num_graph_squash_nodes INT` | The total number of squash commit nodes in the graph. |
+| `// summary:total_commits INT` | The total number of commits (incuding merges) with no squashing. |
+| `// summary:total_graph_commit_nodes INT` | The number of actual commit nodes in the graph. |
+
+Note that total_commits and total_graph_commit_nodes will be the same if squashing is not specified.
+
