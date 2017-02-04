@@ -439,7 +439,8 @@ $ ./git2dot.py -s -c --png --graph-label 'graph[label="git2dot v0.6", fontsize="
 ## Hints
 
 1. For large graphs consider using the `--squash` option.
-2. For graphs that have multiple branches and tags on the same commits consider using the `--crunch` option.
-3. If you only want to see the combined history of a few branches or tags (like release branches) consider using the `--choose-branch` and `--choose-tag` options to prune the graph.
-4. Use the `--since` option if you don't care about ancient history.
-5. The `--graph-label` option can be useful and can be very simple: `--graph-label 'graph[label="MY LABEL"]'`.
+2. For large graphs consider using the svg-pan-zoom zoom() function when the data is loaded to make the nodes visible.
+3. For graphs that have multiple branches and tags on the same commits consider using the `--crunch` option.
+4. If you only want to see the combined history of a few branches or tags (like release branches) consider using the `--choose-branch` and `--choose-tag` options to prune the graph.
+5. Use the `--since` option if you don't care about ancient history.
+6. The `--graph-label` option can be useful and can be very simple: `--graph-label 'graph[label="MY LABEL"]'`.
