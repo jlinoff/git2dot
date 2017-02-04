@@ -1,5 +1,5 @@
 # git2dot
-Visualize a git repository using the graphviz dot tool.
+Visualize a git repository using the graphviz dot tool optionally with pan and zoomn.
 
 It is useful for understanding how git works in detail.  You can use
 it to analyze repositories before and after operations like merge and
@@ -424,10 +424,22 @@ $ ../git2dot.py --graph-label 'graph[label="example2 - compressed pruned state"]
 
 As you can see, branchB has been completely removed in the second one.
 
+## Eat your own dog food
+
+Here is the generated image of the git2dot development tree for v0.6.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22603307/b1538d68-e9fb-11e6-859b-7c0387e9b972.png" width="1100" alt="dog food">
+
+It was generated with this command.
+
+```bash
+$ ./git2dot.py -s -c --png --graph-label 'graph[label="git2dot v0.6", fontsize="18"]' git.dot
+```
+
 ## Hints
 
 1. For large graphs consider using the `--squash` option.
-2. For graphs that have multiple branches and tags on the same commits consuder using the `--crunch` option.
+2. For graphs that have multiple branches and tags on the same commits consider using the `--crunch` option.
 3. If you only want to see the combined history of a few branches or tags (like release branches) consider using the `--choose-branch` and `--choose-tag` options to prune the graph.
 4. Use the `--since` option if you don't care about ancient history.
 5. The `--graph-label` option can be useful and can be very simple: `--graph-label 'graph[label="MY LABEL"]'`.
