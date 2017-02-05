@@ -436,6 +436,39 @@ It was generated with this command.
 $ ./git2dot.py -s -c --png --graph-label 'graph[label="git2dot v0.6", fontsize="18"]' git.dot
 ```
 
+Here is how I created a pannable and zoomable version of the "eat your own dog food" graph.
+
+First I created the HTML and SVG files in an example directory. I also created a PNG file for local testing. Note that I ran the `git2dot.py` command in the git2dot repo and directed the output to the example directory.
+
+```bash
+$ mkdir ~/work/git2dot-zoom-example
+$ cd ~/work/git2dot  # the repo
+$ git2dot.py -s -c -L 'graph[label="\ngit2dot v0.6", fontsize="24"]' --png --svg --html ~/work/git2dot-zoom-example/git.html --choose-tag 'tag: v0.6' ~/work/git2dot-zoom-example/git.dot
+$ open -a Preview ~/work/git2dot-zoom-example/git.png
+```
+
+I then copied over the svg-pan-zoom.min.js file. Without it, panning and zooming cannot work.
+
+```bash
+$ cd ~/work/git2dot-zoom-example
+$ cp ~/work/svg-pan-zoom/dist/svg-pan-zoom.min.js .
+```
+
+Once the files were in place, I started a simple HTTP server in the same directory that I created the HTML and SVG files.
+
+```bash
+$ cd ~/work/git2dot-zoom-example
+$ python -m SimpleHTTPServer 8081
+```
+
+I then navigated to `http://localhost:8081/git.html` in a browser and saw this.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22622763/0b8e6ea8-eaf9-11e6-98b0-94869f7b0f30.png" width="1100" alt="dog food 1">
+
+After that I panned to the left (left-mouse-button-down and drag) and zoomed in using the mousewheel to see the most recent tag.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cloud.githubusercontent.com/assets/2991242/22622765/193a16b0-eaf9-11e6-81ba-950ff26fc13b.png" width="1100" alt="dog food zoom">
+
 ## Hints
 
 1. For large graphs consider using the `--squash` option.
