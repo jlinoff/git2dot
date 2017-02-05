@@ -477,6 +477,7 @@ After that I panned to the left (left-mouse-button-down and drag) and zoomed in 
 4. If you only want to see the combined history of a few branches or tags (like release branches) consider using the `--choose-branch` and `--choose-tag` options to prune the graph.
 5. Use the `--since` option if you don't care about ancient history.
 6. The `--graph-label` option can be useful and can be very simple: `--graph-label 'graph[label="MY LABEL"]'`.
+7. Read the program help: `-h` or `--help`, there is a lot of useful information there.
 
 ## Summary data
 The generated dot file has summary fields at the end that can be useful for post processing.
