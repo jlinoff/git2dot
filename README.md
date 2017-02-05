@@ -15,7 +15,7 @@ Here is a quick rundown of what you are seeing:
  
 1. The bisque (tan) nodes are commits. Each commit has the short id, the commit date, the subject (truncated to 32 characters) and the change-id (if it exists). The fields are the same for merged and squashed nodes as well.
 2. The light red nodes are merged nodes. They are commits that resulted from a merge (they have 2 or more children).
-3. The dark red nodes are squashed nodes. They are the end-points of squashed commit chains. Squashed commit chains do not have any branches, tags, change-ids or merges. They are just a long chain of work. If you turn off squashing, you will see 6 additional commit nodes.
+3. The dark red nodes are squashed nodes. They are the end-points of squashed commit chains. Squashed commit chains do not have any branches, tags, change-ids or merges. They are just a long chain of work. If you turn off squashing, you will see 6 additional commit nodes and the two read squashed nodes will disappear.
 4. The bluish boxes underneath commit and merge nodes are the branches associated with the commit. There is one box for each branch.
 5. The light purple boxes above the commit and merge nodes are the tags associated with the commit. There is one box for each tag.
 6. The arrows on the edges show the back (parent) pointer relationships from the repo. Git does not have child references.
