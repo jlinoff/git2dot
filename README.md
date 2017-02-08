@@ -1,5 +1,7 @@
 # git2dot
-Visualize a git repository using the graphviz dot tool optionally with pan and zoomn.
+[![Releases](https://img.shields.io/github/release/jlinoff/git2dot.svg?style=flat)](https://github.com/jlinoff/git2dot/releases)
+
+Visualize a git repository using the graphviz dot tool optionally with pan and zoom.
 
 It is useful for understanding how git works in detail.  You can use
 it to analyze repositories before and after operations like merge and
