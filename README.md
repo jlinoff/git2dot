@@ -1,4 +1,6 @@
 # git2dot
+[![Releases](https://img.shields.io/github/release/jlinoff/git2dot.svg?style=flat)](https://github.com/jlinoff/git2dot/releases)
+
 Visualize a git repository using the graphviz dot tool optionally with pan and zoom.
 
 It is useful for understanding how git works in detail.  You can use
