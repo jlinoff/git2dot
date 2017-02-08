@@ -99,7 +99,7 @@ import subprocess
 import sys
 
 
-VERSION = '0.7'
+VERSION = '0.8'
 DEFAULT_GITCMD = 'git log --format="|Record:|%h|%p|%d|%ci%n%b"' # --gitcmd
 DEFAULT_RANGE = '--all --topo-order'  # --range
 
@@ -294,6 +294,7 @@ def runcmd_long(cmd, show_output=True):
             # all done, wait for returncode to get populated
             break
         else:
+            char = char.decode('utf-8')
             output += char
             if show_output:
                 sys.stdout.write(char)
@@ -550,7 +551,7 @@ def parse(opts):
 
     infov(opts, 'parsing read data')
     for line in lines:
-        line = line.strip().decode('utf-8')
+        line = line.strip()
         if line.find(u'|Record:|') >= 0:
             flds = line.split('|')
             assert flds[1] == 'Record:'
