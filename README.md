@@ -21,6 +21,7 @@ Here is a quick rundown of what you are seeing:
 4. The bluish boxes underneath commit and merge nodes are the branches associated with the commit. There is one box for each branch.
 5. The light purple boxes above the commit and merge nodes are the tags associated with the commit. There is one box for each tag.
 6. The arrows on the edges show the back (parent) pointer relationships from the repo. Git does not have child references.
+7. The yellow box at the bottom is an optional graph label with custom text.
 
 It works by running over the .git repository in the current directory
 and generating a commit relationship DAG that has both parent and
