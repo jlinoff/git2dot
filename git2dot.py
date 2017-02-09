@@ -99,7 +99,7 @@ import subprocess
 import sys
 
 
-VERSION = '0.8'
+VERSION = '0.8.1'
 DEFAULT_GITCMD = 'git log --format="|Record:|%h|%p|%d|%ci%n%b"' # --gitcmd
 DEFAULT_RANGE = '--all --topo-order'  # --range
 
@@ -294,7 +294,11 @@ def runcmd_long(cmd, show_output=True):
             # all done, wait for returncode to get populated
             break
         else:
-            char = char.decode('utf-8')
+            try:
+                # There is probably a better way to do this.
+                char = char.decode('utf-8')
+            except UnicodeDecodeError:
+                continue
             output += char
             if show_output:
                 sys.stdout.write(char)
