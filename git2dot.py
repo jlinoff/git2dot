@@ -99,7 +99,7 @@ import subprocess
 import sys
 
 
-VERSION = '0.8.1'
+VERSION = '0.8.2'
 DEFAULT_GITCMD = 'git log --format="|Record:|%h|%p|%d|%ci%n%b"' # --gitcmd
 DEFAULT_RANGE = '--all --topo-order'  # --range
 
@@ -1533,7 +1533,7 @@ This option is ignored if -g is specified.
 
     parser.add_argument('-V', '--version',
                         action='version',
-                        version='%(prog)s v{0}'.format(VERSION),
+                        version='%(prog)s version {0}'.format(VERSION),
                         help="""Show program's version number and exit.
  """)
 
