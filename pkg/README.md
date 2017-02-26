@@ -5,6 +5,10 @@ distribution using a virtual environment. When the installation
 is complete, you will be able to run git2dot as a python package
 from a local virtual environment.
 
+> This is not meant to be a guide to doing an official distribution.
+> To do that you will want to use wheels.
+> Please see http://pythonwheels.com/ for details.
+
 It works by creating a setup.py distutils script that packages
 the contents of a local git2dot package into a module in the
 local virtual environment so that it can be run as follows:
