@@ -1,6 +1,6 @@
 ## Package for use in a virtual environment
 
-Shows how to package git2dot into a python package for official
+Shows how to package git2dot into a python package for
 distribution using a virtual environment. When the installation
 is complete, you will be able to run git2dot as a python package
 from a local virtual environment.
