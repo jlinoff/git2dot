@@ -8,4 +8,7 @@ test/test*.dot.html
 test/test*.dot.png
 test/test*.dot.svg
 test/test*.html
+test/test*.difflog
+test/test*.log
+test/test*.filter
 

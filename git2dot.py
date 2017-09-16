@@ -99,7 +99,7 @@ import subprocess
 import sys
 
 
-VERSION = '0.8.2'
+VERSION = '0.8.3'
 DEFAULT_GITCMD = 'git log --format="|Record:|%h|%p|%d|%ci%n%b"' # --gitcmd
 DEFAULT_RANGE = '--all --topo-order'  # --range
 
@@ -704,6 +704,10 @@ def gendot(opts):
 
     ofp.write('digraph G {\n')
     for v in opts.dot_option:
+        if len(opts.font_size) and 'fontsize=' in v:
+            v = re.sub(r'(fontsize=)[^,]+,', r'\1"' + opts.font_size + r'",' , v)
+        if len(opts.font_name) and 'fontsize=' in v:
+            v = re.sub(r'(fontsize=[^,]+),', r'\1, fontname="' + opts.font_name + r'",', v)
         ofp.write('   {}'.format(v))
         if v[-1] != ';':
             ofp.write(';')
@@ -1043,6 +1047,10 @@ def getopts():
                  origin/1.0.0, origin/1.0.1 and origin/1.1.0
    $ {0} --choose-branch origin/1.0.0 --choose-branch origin/1.0.1 --choose-branch origin/1.1.0 git01.dot
 
+   # Example 11. change the font name and size for the graph, nodes
+   #             and edges.
+   $ {0} --png --font-name helvetica --font-size 14.0 git.dot
+
 COPYRIGHT:
    Copyright (c) 2017 Joe Linoff, all rights reserved
 
@@ -1193,7 +1201,7 @@ This works around unwieldy placements of the individual
 nodes by dot in large graphs.
  ''')
 
-    x = ['graph[rankdir="LR", bgcolor="white"]',
+    x = ['graph[rankdir="LR", fontsize=10.0, bgcolor="white"]',
          'node[shape=ellipse, fontsize=10.0, style="filled"]',
          'edge[weight=2, penwidth=1.0, fontsize=10.0, arrowtail="open", dir="back"]']
     parser.add_argument('-d', '--dot-option',
@@ -1244,6 +1252,22 @@ surround them with a delimiter like @FOO@.  If you simply specify
 @FOO, then this will match @FOO, @FOOBAR and anything else that
 contains @FOO which is probably not what you want.
  '''.replace('%', '%%'))
+
+    parser.add_argument('--font-name',
+                        action='store',
+                        type=str,
+                        default='',
+                        help='''Change the font name of graph, node and edge objects.
+Here is an example: --font-name helvetica.
+ ''')
+
+    parser.add_argument('--font-size',
+                        action='store',
+                        type=str,
+                        default='',
+                        help='''Change the font size of graph, node and edge objects.
+Here is an example: --font-size 14.0.
+ ''')
 
     parser.add_argument('-g', '--gitcmd',
                         action='store',
