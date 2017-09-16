@@ -1,5 +1,5 @@
 digraph G {
-   graph[rankdir="LR", bgcolor="white"];
+   graph[rankdir="LR", fontsize=10.0, bgcolor="white"];
    node[shape=ellipse, fontsize=10.0, style="filled"];
    edge[weight=2, penwidth=1.0, fontsize=10.0, arrowtail="open", dir="back"];
 
@@ -40,7 +40,7 @@ digraph G {
    {rank=same; "78d57e4"; "78d57e4+tag: v2.0a"};
 
    // graph label
-   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test10<br/>Purpose: 3 branches, tags and branches, choose<br/>Dir:     /Users/jlinoff/work/git2dot/test<br/>Date:    Sat Feb  4 09:13:46 PST 2017</font></td></tr></table>>];
+   graph[label=<<table border="0"><tr><td border="1" align="left" balign="left" bgcolor="lightyellow"><font face="courier" point-size="9">Test:    test10<br/>Purpose: 3 branches, tags and branches, choose<br/>Dir:     /opt/git2dot/test<br/>Date:    Sat Sep 16 18:28:10 UTC 2017</font></td></tr></table>>];
 }
 // summary:num_graph_commit_nodes 3
 // summary:num_graph_merge_nodes 1
